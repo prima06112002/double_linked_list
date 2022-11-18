@@ -236,8 +236,20 @@ class Program
                             }
                         }
                         break;
+                    case '6':
+                        return;
+                    default:
+                        {
+                            Console.WriteLine("invalid option");
+                        }
+                        break;
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("Check for the values entered");
+            }
+            
         }
     }
 }
