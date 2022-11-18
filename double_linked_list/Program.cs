@@ -62,10 +62,61 @@ namespace double_linked_list
             {
                 if (nim >= current.noMhs)
                 {
-
+                    Console.WriteLine("\nDuplicate roll number not allowed");
+                    return;
                 }
-
             }
+            /*On the execution of the above for loop,prev and
+             * current will point to those nodes
+             * between which the new node is to be inserted*/
+            newNode.next = current;
+            newNode.prev = previous;
+
+            //if the node id to be inserted at the end of the list
+            if(current == null)
+            {
+                newNode.next = null;
+                previous.next = newNode;
+                return;
+            }
+            current.prev = newNode;
+            previous.next = newNode;
+        }
+        public bool Search(int rollNo,ref Node previous, ref Node current)
+        {
+            previous = current = START;
+            while (current != null &&
+                rollNo != current.noMhs)
+            {
+                previous = current;
+                current = current.next;
+            }
+            return (current != null);
+        }
+        public bool dellNode(int rollNo)
+        {
+            Node previous, current;
+            previous = current = null;
+            if (Search(rollNo,ref previous,ref current) == false)
+                return false;
+            //the begining of data
+            if (current.next == null)
+            {
+                previous.next = null;
+                return true;
+            }
+            //Node between two node in the list
+            if(current == START)
+            {
+                START = START.next;
+                if (START != null)
+                    START.prev = null;
+                return true;
+            }
+            /*if to be deleted is in between the list then the following lines of is executed. */
+            previous.next = current.next;
+            current.next.prev = previous;
+            return true;
         }
     }
 }
